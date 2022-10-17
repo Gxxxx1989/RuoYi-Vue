@@ -169,8 +169,8 @@
     SELECT COUNT(*) FROM `app_scan_record` t WHERE t.user_id=#{idNo} AND TO_DAYS(t.created_date) = TO_DAYS(NOW());
   </select>
 
-  <select id="userList" resultType="com.ruoyi.ruoyiapp.entity.AppUserEntity">
-    SELECT * FROM `app_user` LIMIT #{pageIndex},#{pageSize}
+  <select id="userList" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM `app_user` LIMIT #{pageIndex},#{pageSize}
   </select>
 
 </mapper>

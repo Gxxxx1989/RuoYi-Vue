@@ -79,6 +79,7 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public List<AppUserEntity> userList(int currentPage, int pageSize) {
         int pageIndex = (currentPage-1) * pageSize;
-        return appUserMapper.userList(pageIndex, pageSize);
+        List<AppUserEntity> appUserEntities = appUserMapper.userList(pageIndex, pageSize);
+        return appUserEntities;
     }
 }
