@@ -2,6 +2,7 @@ package com.ruoyi.ruoyiapp.mapper;
 
 import com.ruoyi.ruoyiapp.entity.AppUserEntity ;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.UserResponseVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,4 +54,17 @@ public interface AppUserMapper {
     * @return 用户列表
     */
     List<AppUserEntity> selectUserList(UserRequestVo userRequestVo);
+
+
+    /**
+    * 功能描述 分页查询页面列表
+    * @author guoxi_789@126.com
+    * @date 2022/10/17
+    * @param  pageIndex 页面索引
+    * @param  pageSize 页面条数
+    * @return 用户列表
+    */
+    List<UserResponseVo> queryUserList(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+
+
 }

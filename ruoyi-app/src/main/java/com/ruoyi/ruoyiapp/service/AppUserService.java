@@ -2,6 +2,7 @@ package com.ruoyi.ruoyiapp.service;
 
 import com.ruoyi.ruoyiapp.entity.AppUserEntity;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.UserResponseVo;
 
 import java.util.List;
 
@@ -60,4 +61,7 @@ public interface AppUserService {
 
 
     List<AppUserEntity> selectUserList(UserRequestVo userRequestVo);
+
+
+    List<UserResponseVo> queryUserList(int currentPage, int pageSize);
 }

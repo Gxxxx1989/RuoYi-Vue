@@ -50,7 +50,7 @@ public class UserController {
     @PostMapping(value = "/list/{currentPage}/{pageSize}")
     @ApiOperation("查询用户列表")
     public AjaxResult list(@PathVariable int currentPage,@PathVariable int pageSize){
-        return AjaxResult.success(appUserService.userList(currentPage, pageSize));
+        return AjaxResult.success(appUserService.queryUserList(currentPage, pageSize));
     }
 
     @PostMapping("/export")

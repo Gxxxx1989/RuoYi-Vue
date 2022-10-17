@@ -15,7 +15,7 @@
         <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
     </resultMap>
 
-    <resultMap id="userResultMap" type="com.ruoyi.ruoyiapp.response.UserResponseVo">
+    <resultMap id="UserResultMap" type="com.ruoyi.ruoyiapp.response.UserResponseVo">
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="sex" jdbcType="VARCHAR" property="sex"/>
         <result column="contact_number" jdbcType="VARCHAR" property="contactNumber"/>
@@ -192,13 +192,22 @@
     </select>
 
     <select id="selectUserList" resultMap="BaseResultMap" parameterType="com.ruoyi.ruoyiapp.request.UserRequestVo">
-        select <include refid="Base_Column_List"/> from app_user
+        select
+        <include refid="Base_Column_List"/>
+        from app_user
+        LIMIT #{pageIndex}, #{pageSize}
+    </select>
 
-        <where>
-          1=1
-        </where>
-
-        limit #{pageIndex}, #{pageSize}
+    <select id="queryUserList" resultMap="UserResultMap">
+        SELECT
+            tuser.*,
+            COUNT( scan.id ) AS inspectionsNumber
+        FROM
+            `app_user` tuser
+            LEFT JOIN app_scan_record scan ON tuser.id_no = scan.user_id
+        GROUP BY
+            tuser.id
+        LIMIT #{pageIndex},#{pageSize}
     </select>
 
 </mapper>

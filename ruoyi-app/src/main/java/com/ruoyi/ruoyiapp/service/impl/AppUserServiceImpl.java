@@ -5,6 +5,7 @@ import com.ruoyi.ruoyiapp.entity.AppScanRecordEntity;
 import com.ruoyi.ruoyiapp.entity.AppUserEntity;
 import com.ruoyi.ruoyiapp.mapper.AppUserMapper;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.UserResponseVo;
 import com.ruoyi.ruoyiapp.service.AppScanRecordService;
 import com.ruoyi.ruoyiapp.service.AppUserService;
 import lombok.RequiredArgsConstructor;
@@ -87,5 +88,13 @@ public class AppUserServiceImpl implements AppUserService {
     public List<AppUserEntity> selectUserList(UserRequestVo userRequestVo) {
         userRequestVo.setPageIndex((userRequestVo.getPageIndex() -1) * userRequestVo.getPageSize());
         return appUserMapper.selectUserList(userRequestVo);
+    }
+
+
+    @Override
+    public List<UserResponseVo> queryUserList(int currentPage, int pageSize) {
+        int pageIndex = (currentPage-1) * pageSize;
+        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(pageIndex, pageSize);
+        return userResponseVos;
     }
 }
