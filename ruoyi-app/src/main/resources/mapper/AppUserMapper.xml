@@ -26,7 +26,7 @@
         <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
         <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
-        <result column="inspectionsNumber" jdbcType="INT" property="inspectionsNumber"/>
+        <result column="inspectionsNumber" jdbcType="INTEGER" property="inspectionsNumber"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, `name`, sex, contact_number, id_no, company, department, created_date, created_by, 
