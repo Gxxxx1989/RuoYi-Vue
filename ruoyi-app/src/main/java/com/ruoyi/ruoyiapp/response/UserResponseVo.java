@@ -1,27 +1,12 @@
-package com.ruoyi.ruoyiapp.entity;
+package com.ruoyi.ruoyiapp.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import lombok.Data;
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * app_user
- * @author 
- */
-@Table(name="app_user")
 @Data
-@Entity
-public class AppUserEntity implements Serializable {
-    /**
-     * 主键UUID
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class UserResponseVo {
 
     /**
      * 姓名
@@ -81,6 +66,9 @@ public class AppUserEntity implements Serializable {
      * 更新人
      */
     private String updatedBy;
+
+    @Excel(name = "检验次数")
+    private int inspectionsNumber;
 
     private static final long serialVersionUID = 1L;
 }

@@ -30,4 +30,10 @@ public class UserRequestVo implements Serializable {
     /**部门*/
     private String department;
 
+    /**页面索引*/
+    private int pageIndex;
+
+    /**页面条数*/
+    private int pageSize;
+
 }
