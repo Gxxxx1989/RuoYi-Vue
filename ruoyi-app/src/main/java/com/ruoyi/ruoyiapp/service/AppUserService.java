@@ -60,7 +60,7 @@ public interface AppUserService {
     List<AppUserEntity> userList(int currentPage, int pageSize);
 
 
-    List<AppUserEntity> selectUserList(UserRequestVo userRequestVo);
+    List<UserResponseVo> selectUserList(UserRequestVo userRequestVo);
 
 
     List<UserResponseVo> queryUserList(int currentPage, int pageSize);

@@ -4,6 +4,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.ruoyiapp.entity.AppUserEntity;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.UserResponseVo;
 import com.ruoyi.ruoyiapp.service.AppUserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -56,8 +57,8 @@ public class UserController {
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserRequestVo userRequestVo)
     {
-        List<AppUserEntity> list = appUserService.selectUserList(userRequestVo);
-        ExcelUtil<AppUserEntity> util = new ExcelUtil<>(AppUserEntity.class);
+        List<UserResponseVo> list = appUserService.selectUserList(userRequestVo);
+        ExcelUtil<UserResponseVo> util = new ExcelUtil<>(UserResponseVo.class);
         util.exportExcel(response, list, "用户数据");
     }
 

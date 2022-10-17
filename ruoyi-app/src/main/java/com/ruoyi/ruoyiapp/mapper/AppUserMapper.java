@@ -53,7 +53,7 @@ public interface AppUserMapper {
     * @param  userRequestVo 参数
     * @return 用户列表
     */
-    List<AppUserEntity> selectUserList(UserRequestVo userRequestVo);
+    List<UserResponseVo> selectUserList(UserRequestVo userRequestVo);
 
 
     /**
