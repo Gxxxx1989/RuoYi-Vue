@@ -5,10 +5,13 @@ import com.ruoyi.ruoyiapp.entity.AppScanRecordEntity;
 import com.ruoyi.ruoyiapp.entity.AppUserEntity;
 import com.ruoyi.ruoyiapp.mapper.AppUserMapper;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.UserMatchResponseVo;
+import com.ruoyi.ruoyiapp.response.UserResponseListVo;
 import com.ruoyi.ruoyiapp.response.UserResponseVo;
 import com.ruoyi.ruoyiapp.service.AppScanRecordService;
 import com.ruoyi.ruoyiapp.service.AppUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -42,16 +45,18 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public String matchAndSave(UserRequestVo userRequestVo) {
+    public UserMatchResponseVo matchAndSave(UserRequestVo userRequestVo) {
+        UserMatchResponseVo userMatchResponseVo =new UserMatchResponseVo();
         AppUserEntity appUserEntity = appUserMapper.queryforCondition(userRequestVo.getName(), userRequestVo.getIdNo());
-        //该用户存在
         if (appUserEntity != null) {
+            BeanUtils.copyProperties(appUserEntity,userMatchResponseVo);
+            userMatchResponseVo.setResultCode(ScanResultEnum.PASS.getCode());
             //查询该用户今日扫码次数
             int count = timesLimit(userRequestVo.getIdNo());
             //扫描次数开关
             if (scanEnabled) {
                 if (count >= timesLimit) {
-                    return ScanResultEnum.OVER_LIMIT.getCode();
+                    userMatchResponseVo.setResultCode(ScanResultEnum.OVER_LIMIT.getCode());
                 }
             }
             AppScanRecordEntity appScanRecordEntity = new AppScanRecordEntity();
@@ -59,10 +64,11 @@ public class AppUserServiceImpl implements AppUserService {
             appScanRecordEntity.setScannedDate(new Date());
             appScanRecordEntity.setCreatedDate(new Date());
             appScanRecordService.save(appScanRecordEntity);
-            return ScanResultEnum.PASS.getCode();
+            return userMatchResponseVo;
         } else {
             //TODO 用户不存在，保存到新建的表中
-            return ScanResultEnum.FAILED.getCode();
+            userMatchResponseVo.setResultCode(ScanResultEnum.FAILED.getCode());
+            return userMatchResponseVo;
         }
     }
 
@@ -85,16 +91,19 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public List<UserResponseVo> selectUserList(UserRequestVo userRequestVo) {
-        userRequestVo.setPageIndex((userRequestVo.getPageIndex() -1) * userRequestVo.getPageSize());
-        return appUserMapper.selectUserList(userRequestVo);
+    public UserResponseListVo queryUserList(int currentPage, int pageSize) {
+        UserResponseListVo responseListVo = new UserResponseListVo();
+        int pageIndex = (currentPage-1) * pageSize;
+        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(pageIndex, pageSize);
+        responseListVo.setUserResponseVoList(userResponseVos);
+        responseListVo.setTotal(appUserMapper.count());
+        return responseListVo;
     }
 
 
     @Override
-    public List<UserResponseVo> queryUserList(int currentPage, int pageSize) {
-        int pageIndex = (currentPage-1) * pageSize;
-        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(pageIndex, pageSize);
-        return userResponseVos;
+    public List<UserResponseVo> selectUserList(UserRequestVo userRequestVo) {
+        userRequestVo.setPageIndex((userRequestVo.getPageIndex() -1) * userRequestVo.getPageSize());
+        return appUserMapper.selectUserList(userRequestVo);
     }
 }

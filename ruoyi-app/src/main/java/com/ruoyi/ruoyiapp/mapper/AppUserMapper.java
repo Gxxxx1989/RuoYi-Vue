@@ -66,5 +66,13 @@ public interface AppUserMapper {
     */
     List<UserResponseVo> queryUserList(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
+    /**
+    * 功能描述 查询总条数
+    * @author guoxi_789@126.com
+    * @date 2022/10/17
+    * @return 总条数
+    */
+    int count();
+
 
 }

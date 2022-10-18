@@ -9,9 +9,10 @@
     <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, scanned_date, created_date, created_by, update_date, updated_by
+    id, user_id, scanned_date, created_date, created_by, update_date, updated_by,org_code
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,10 +26,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity" useGeneratedKeys="true">
     insert into app_scan_record (user_id, scanned_date, created_date, 
-      created_by, update_date, updated_by
+      created_by, update_date, updated_by,org_code
       )
     values (#{userId,jdbcType=VARCHAR}, #{scannedDate,jdbcType=TIMESTAMP}, #{createdDate,jdbcType=TIMESTAMP}, 
-      #{createdBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}
+      #{createdBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR},#{orgCode,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity" useGeneratedKeys="true">
@@ -52,6 +53,9 @@
       <if test="updatedBy != null">
         updated_by,
       </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -71,6 +75,9 @@
       </if>
       <if test="updatedBy != null">
         #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -95,6 +102,9 @@
       <if test="updatedBy != null">
         updated_by = #{updatedBy,jdbcType=VARCHAR},
       </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -106,6 +116,7 @@
       created_by = #{createdBy,jdbcType=VARCHAR},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       updated_by = #{updatedBy,jdbcType=VARCHAR}
+      org_code = #{orgCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

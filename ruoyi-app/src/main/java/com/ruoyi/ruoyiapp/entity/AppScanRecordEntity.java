@@ -54,5 +54,11 @@ public class AppScanRecordEntity implements Serializable {
      */
     private String updatedBy;
 
+
+    /**
+     * 更新人
+     */
+    private String orgCode;
+
     private static final long serialVersionUID = 1L;
 }

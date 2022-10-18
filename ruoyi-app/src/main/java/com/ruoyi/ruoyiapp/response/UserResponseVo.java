@@ -72,5 +72,10 @@ public class UserResponseVo {
     @Excel(name = "检验次数")
     private int inspectionsNumber;
 
+    /**
+     * 总条数
+     */
+    private int total;
+
     private static final long serialVersionUID = 1L;
 }

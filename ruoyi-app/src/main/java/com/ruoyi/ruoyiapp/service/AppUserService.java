@@ -2,6 +2,8 @@ package com.ruoyi.ruoyiapp.service;
 
 import com.ruoyi.ruoyiapp.entity.AppUserEntity;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.UserMatchResponseVo;
+import com.ruoyi.ruoyiapp.response.UserResponseListVo;
 import com.ruoyi.ruoyiapp.response.UserResponseVo;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public interface AppUserService {
     * @param  userRequestVo 参数
     * @return 返回状态码
     */
-    String matchAndSave(UserRequestVo userRequestVo);
+    UserMatchResponseVo matchAndSave(UserRequestVo userRequestVo);
 
     /**
     * 功能描述 查询单个用户信息
@@ -63,5 +65,5 @@ public interface AppUserService {
     List<UserResponseVo> selectUserList(UserRequestVo userRequestVo);
 
 
-    List<UserResponseVo> queryUserList(int currentPage, int pageSize);
+    UserResponseListVo queryUserList(int currentPage, int pageSize);
 }

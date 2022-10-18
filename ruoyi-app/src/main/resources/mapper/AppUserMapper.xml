@@ -177,7 +177,7 @@
     SELECT * FROM app_user t WHERE t.id_no=#{idNo}
   </select>
 
-    <select id="queryforCondition" resultType="com.ruoyi.ruoyiapp.entity.AppUserEntity">
+    <select id="queryforCondition" resultMap="BaseResultMap">
     SELECT * FROM app_user t WHERE t.name=#{name} and t.id_no=#{idNo}
   </select>
 
@@ -213,6 +213,12 @@
         GROUP BY
             tuser.id
         LIMIT #{pageIndex},#{pageSize}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*) AS total
+        FROM
+            `app_user` tuser
     </select>
 
 </mapper>

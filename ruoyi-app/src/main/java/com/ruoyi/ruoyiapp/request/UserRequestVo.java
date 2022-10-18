@@ -36,4 +36,7 @@ public class UserRequestVo implements Serializable {
     /**页面条数*/
     private int pageSize;
 
+    /**检测机构*/
+    private String orgCode;
+
 }
