@@ -53,6 +53,14 @@ public class UserResponseVo {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createdDate;
 
+
+    /**
+     * 创建日期
+     */
+    @Excel(name = "创建日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    private Date scannedDate;
+
     /**
      * 创建人
      */
@@ -76,6 +84,10 @@ public class UserResponseVo {
      * 总条数
      */
     private int total;
+
+    /**检测机构*/
+    @Excel(name = "检测机构")
+    private String orgCode;
 
     private static final long serialVersionUID = 1L;
 }

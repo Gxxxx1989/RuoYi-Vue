@@ -27,6 +27,8 @@
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
         <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
         <result column="inspectionsNumber" jdbcType="INTEGER" property="inspectionsNumber"/>
+        <result column="scanned_date" jdbcType="TIMESTAMP" property="scannedDate"/>
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, `name`, sex, contact_number, id_no, company, department, created_date, created_by, 
@@ -206,7 +208,9 @@
     <select id="queryUserList" resultMap="UserResultMap">
         SELECT
             tuser.*,
-            COUNT( scan.id ) AS inspectionsNumber
+            COUNT( scan.id ) AS inspectionsNumber,
+            MAX(scan.scanned_date) AS scanned_date,
+            MAX(scan.org_code) AS org_code
         FROM
             `app_user` tuser
             LEFT JOIN app_scan_record scan ON tuser.id_no = scan.user_id
