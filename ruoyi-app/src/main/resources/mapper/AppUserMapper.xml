@@ -219,6 +219,15 @@
             <if test="orgCode != null and orgCode !=''">
                 and  scan.org_code =#{orgCode}
             </if>
+            <if test="name != null and name !=''">
+                and  tuser.name =#{name}
+            </if>
+            <if test="idNo != null and idNo !=''">
+                and  tuser.id_no =#{idNo}
+            </if>
+            <if test="contactNumber != null and contactNumber !=''">
+                and  tuser.contact_number =#{contactNumber}
+            </if>
         </where>
         GROUP BY
             tuser.id
@@ -229,6 +238,22 @@
             COUNT(*) AS total
         FROM
             `app_user` tuser
+        LEFT JOIN app_scan_record scan ON tuser.id_no = scan.user_id
+        <where>
+            1=1
+            <if test="orgCode != null and orgCode !=''">
+                and  scan.org_code =#{orgCode}
+            </if>
+            <if test="name != null and name !=''">
+                and  tuser.name =#{name}
+            </if>
+            <if test="idNo != null and idNo !=''">
+                and  tuser.id_no =#{idNo}
+            </if>
+            <if test="contactNumber != null and contactNumber !=''">
+                and  tuser.contact_number =#{contactNumber}
+            </if>
+        </where>
     </select>
 
 </mapper>

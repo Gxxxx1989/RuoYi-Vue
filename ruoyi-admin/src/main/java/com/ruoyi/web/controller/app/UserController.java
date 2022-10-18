@@ -48,16 +48,16 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/list/{currentPage}/{pageSize}")
+    @PostMapping(value = "/list")
     @ApiOperation("查询用户列表")
-    public AjaxResult list(@PathVariable int currentPage,@PathVariable int pageSize){
-        return AjaxResult.success(appUserService.queryUserList(currentPage, pageSize));
+    public AjaxResult list(@RequestBody UserRequestVo userRequestVo){
+        return AjaxResult.success(appUserService.queryUserList(userRequestVo));
     }
 
     @PostMapping("/export")
     public void export(HttpServletResponse response, UserRequestVo userRequestVo)
     {
-        List<UserResponseVo> list = appUserService.selectUserList(userRequestVo);
+        List<UserResponseVo> list = appUserService.selectUserListForExport(userRequestVo);
         ExcelUtil<UserResponseVo> util = new ExcelUtil<>(UserResponseVo.class);
         util.exportExcel(response, list, "用户数据");
     }

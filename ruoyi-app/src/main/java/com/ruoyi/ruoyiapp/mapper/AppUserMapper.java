@@ -60,12 +60,10 @@ public interface AppUserMapper {
     * 功能描述 分页查询页面列表
     * @author guoxi_789@126.com
     * @date 2022/10/17
-    * @param  pageIndex 页面索引
-    * @param  pageSize 页面条数
-    * @param  orgCode 组织机构编码
+    * @param  userRequestVo 请求参数
     * @return 用户列表
     */
-    List<UserResponseVo> queryUserList(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize,@Param("orgCode") String orgCode);
+    List<UserResponseVo> queryUserList(UserRequestVo userRequestVo);
 
     /**
     * 功能描述 查询总条数
@@ -73,7 +71,7 @@ public interface AppUserMapper {
     * @date 2022/10/17
     * @return 总条数
     */
-    int count();
+    int count(UserRequestVo userRequestVo);
 
 
 }

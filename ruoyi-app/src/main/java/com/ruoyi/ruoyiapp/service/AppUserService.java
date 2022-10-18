@@ -62,8 +62,8 @@ public interface AppUserService {
     List<AppUserEntity> userList(int currentPage, int pageSize);
 
 
-    List<UserResponseVo> selectUserList(UserRequestVo userRequestVo);
+    List<UserResponseVo> selectUserListForExport(UserRequestVo userRequestVo);
 
 
-    UserResponseListVo queryUserList(int currentPage, int pageSize);
+    UserResponseListVo queryUserList(UserRequestVo userRequestVo);
 }

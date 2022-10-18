@@ -97,13 +97,13 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public UserResponseListVo queryUserList(int currentPage, int pageSize) {
+    public UserResponseListVo queryUserList(UserRequestVo userRequestVo) {
         //获取登录用户信息
         LoginUser loginUser = SecurityUtils.getLoginUser();
         SysDept dept = loginUser.getUser().getDept();
-        String orgCode ="";
+        String orgCode = "";
         UserResponseListVo responseListVo = new UserResponseListVo();
-        int pageIndex = (currentPage-1) * pageSize;
+
         if (StringUtils.isNotBlank(dept.getDeptName())){
             if (dept.getDeptName().equals(OrgCodeEnum.JMD.getName())){
                 orgCode =OrgCodeEnum.JMD.getCode();
@@ -121,8 +121,11 @@ public class AppUserServiceImpl implements AppUserService {
                 orgCode =OrgCodeEnum.PT.getCode();
             }
         }
-
-        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(pageIndex, pageSize, orgCode);
+        //设置机构码
+        userRequestVo.setOrgCode(orgCode);
+        //设置分页索引
+        userRequestVo.setPageIndex((userRequestVo.getPageIndex() -1) * userRequestVo.getPageSize());
+        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(userRequestVo);
         for (UserResponseVo userResponseVo : userResponseVos) {
             if (StringUtils.isNotBlank(userResponseVo.getOrgCode())){
                 if (userResponseVo.getOrgCode().equals(OrgCodeEnum.JMD.getCode())){
@@ -143,13 +146,13 @@ public class AppUserServiceImpl implements AppUserService {
             }
         }
         responseListVo.setUserResponseVoList(userResponseVos);
-        responseListVo.setTotal(appUserMapper.count());
+        responseListVo.setTotal(appUserMapper.count(userRequestVo));
         return responseListVo;
     }
 
 
     @Override
-    public List<UserResponseVo> selectUserList(UserRequestVo userRequestVo) {
+    public List<UserResponseVo> selectUserListForExport(UserRequestVo userRequestVo) {
         userRequestVo.setPageIndex((userRequestVo.getPageIndex() -1) * userRequestVo.getPageSize());
         return appUserMapper.selectUserList(userRequestVo);
     }
