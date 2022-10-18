@@ -214,6 +214,12 @@
         FROM
             `app_user` tuser
             LEFT JOIN app_scan_record scan ON tuser.id_no = scan.user_id
+        <where>
+            1=1
+            <if test="orgCode != null and orgCode !=''">
+                and  scan.org_code =#{orgCode}
+            </if>
+        </where>
         GROUP BY
             tuser.id
         LIMIT #{pageIndex},#{pageSize}

@@ -1,5 +1,8 @@
 package com.ruoyi.ruoyiapp.service.impl;
 
+import com.ruoyi.common.core.domain.entity.SysDept;
+import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.ruoyiapp.constant.OrgCodeEnum;
 import com.ruoyi.ruoyiapp.constant.ScanResultEnum;
 import com.ruoyi.ruoyiapp.entity.AppScanRecordEntity;
@@ -95,9 +98,31 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public UserResponseListVo queryUserList(int currentPage, int pageSize) {
+        //获取登录用户信息
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        SysDept dept = loginUser.getUser().getDept();
+        String orgCode ="";
         UserResponseListVo responseListVo = new UserResponseListVo();
         int pageIndex = (currentPage-1) * pageSize;
-        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(pageIndex, pageSize);
+        if (StringUtils.isNotBlank(dept.getDeptName())){
+            if (dept.getDeptName().equals(OrgCodeEnum.JMD.getName())){
+                orgCode =OrgCodeEnum.JMD.getCode();
+            }
+            if (dept.getDeptName().equals(OrgCodeEnum.DJ.getName())){
+                orgCode =OrgCodeEnum.DJ.getCode();
+            }
+            if (dept.getDeptName().equals(OrgCodeEnum.CJ.getName())){
+                orgCode =OrgCodeEnum.CJ.getCode();
+            }
+            if (dept.getDeptName().equals(OrgCodeEnum.HH.getName())){
+                orgCode =OrgCodeEnum.HH.getCode();
+            }
+            if (dept.getDeptName().equals(OrgCodeEnum.PT.getName())){
+                orgCode =OrgCodeEnum.PT.getCode();
+            }
+        }
+
+        List<UserResponseVo> userResponseVos = appUserMapper.queryUserList(pageIndex, pageSize, orgCode);
         for (UserResponseVo userResponseVo : userResponseVos) {
             if (StringUtils.isNotBlank(userResponseVo.getOrgCode())){
                 if (userResponseVo.getOrgCode().equals(OrgCodeEnum.JMD.getCode())){

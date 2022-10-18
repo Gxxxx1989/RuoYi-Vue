@@ -62,9 +62,10 @@ public interface AppUserMapper {
     * @date 2022/10/17
     * @param  pageIndex 页面索引
     * @param  pageSize 页面条数
+    * @param  orgCode 组织机构编码
     * @return 用户列表
     */
-    List<UserResponseVo> queryUserList(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
+    List<UserResponseVo> queryUserList(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize,@Param("orgCode") String orgCode);
 
     /**
     * 功能描述 查询总条数
