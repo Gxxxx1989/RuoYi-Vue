@@ -154,6 +154,6 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public List<UserResponseVo> selectUserListForExport(UserRequestVo userRequestVo) {
         userRequestVo.setPageIndex((userRequestVo.getPageIndex() -1) * userRequestVo.getPageSize());
-        return appUserMapper.selectUserList(userRequestVo);
+        return appUserMapper.selectExportUserList(userRequestVo);
     }
 }

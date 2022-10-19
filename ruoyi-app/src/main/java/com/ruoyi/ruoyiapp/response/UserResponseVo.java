@@ -57,7 +57,7 @@ public class UserResponseVo {
     /**
      * 创建日期
      */
-    @Excel(name = "创建日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "扫码日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date scannedDate;
 

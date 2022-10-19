@@ -193,7 +193,7 @@
         FROM `app_user` LIMIT #{pageIndex},#{pageSize}
     </select>
 
-    <select id="selectUserList" resultMap="UserResultMap">
+    <select id="selectExportUserList" resultMap="UserResultMap">
          SELECT
             tuser.*,
             COUNT( scan.id ) AS inspectionsNumber

@@ -62,4 +62,10 @@ public class AppScanRecordServiceImpl implements AppScanRecordService {
         }
         return appScanRecordResponseListVo;
     }
+
+    @Override
+    public List<AppScanRecordResponseVo> queryForExport(AppScanRecordRequestVo appScanRecordRequestVo) {
+        appScanRecordRequestVo.setPageIndex((appScanRecordRequestVo.getPageIndex() -1) * appScanRecordRequestVo.getPageSize());
+        return appScanRecordMapper.queryForExport(appScanRecordRequestVo);
+    }
 }

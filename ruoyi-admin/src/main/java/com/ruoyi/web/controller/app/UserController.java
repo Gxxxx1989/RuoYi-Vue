@@ -5,6 +5,8 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.ruoyiapp.entity.AppUserEntity;
 import com.ruoyi.ruoyiapp.request.AppScanRecordRequestVo;
 import com.ruoyi.ruoyiapp.request.UserRequestVo;
+import com.ruoyi.ruoyiapp.response.AppScanRecordResponseListVo;
+import com.ruoyi.ruoyiapp.response.AppScanRecordResponseVo;
 import com.ruoyi.ruoyiapp.response.UserResponseVo;
 import com.ruoyi.ruoyiapp.service.AppScanRecordService;
 import com.ruoyi.ruoyiapp.service.AppUserService;
@@ -69,6 +71,14 @@ public class UserController {
     @ApiOperation("查询用户列表")
     public AjaxResult scanList(@RequestBody AppScanRecordRequestVo appScanRecordRequestVo){
         return AjaxResult.success(appScanRecordService.queryScanList(appScanRecordRequestVo));
+    }
+
+    @PostMapping(value = "/scan/export")
+    @ApiOperation("查询用户列表")
+    public void scanListExport(HttpServletResponse response,AppScanRecordRequestVo appScanRecordRequestVo){
+        List<AppScanRecordResponseVo> list = appScanRecordService.queryForExport(appScanRecordRequestVo);
+        ExcelUtil<AppScanRecordResponseVo> util = new ExcelUtil<>(AppScanRecordResponseVo.class);
+        util.exportExcel(response, list, "扫码数据");
     }
 
 }

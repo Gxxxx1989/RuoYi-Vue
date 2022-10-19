@@ -3,6 +3,7 @@ package com.ruoyi.ruoyiapp.service;
 import com.ruoyi.ruoyiapp.entity.AppScanRecordEntity;
 import com.ruoyi.ruoyiapp.request.AppScanRecordRequestVo;
 import com.ruoyi.ruoyiapp.response.AppScanRecordResponseListVo;
+import com.ruoyi.ruoyiapp.response.AppScanRecordResponseVo;
 
 import java.util.List;
 
@@ -30,4 +31,13 @@ public interface AppScanRecordService {
     * @return 返回扫描列表
     */
     AppScanRecordResponseListVo queryScanList(AppScanRecordRequestVo appScanRecordRequestVo);
+
+    /**
+    * 功能描述 扫描纪录导出
+    * @author guoxi_789@126.com
+    * @date 2022/10/19
+    * @param
+    * @return
+    */
+    List<AppScanRecordResponseVo> queryForExport(AppScanRecordRequestVo appScanRecordRequestVo);
 }

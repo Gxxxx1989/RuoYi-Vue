@@ -16,11 +16,13 @@ public class AppScanRecordResponseVo {
     /**
      * u_user表主键id
      */
+    @Excel(name = "身份证号码")
     private String userId;
 
     /**
      * 用户名
      */
+    @Excel(name = "用户名称")
     private String name;
 
     /**
@@ -39,6 +41,7 @@ public class AppScanRecordResponseVo {
      * 扫码日期
      */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @Excel(name = "扫码日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date scannedDate;
 
 
@@ -46,6 +49,7 @@ public class AppScanRecordResponseVo {
      * 创建日期
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Excel(name = "创建日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createdDate;
 
     /**
@@ -68,6 +72,7 @@ public class AppScanRecordResponseVo {
     /**
      * 更新人
      */
+    @Excel(name = "检测机构")
     private String orgCode;
 
     private static final long serialVersionUID = 1L;

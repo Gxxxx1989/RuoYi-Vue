@@ -37,4 +37,13 @@ public interface AppScanRecordMapper {
      * @return 总条数
      */
     int count(AppScanRecordRequestVo userRequestVo);
+
+    /**
+    * 功能描述 扫码记录导出
+    * @author guoxi_789@126.com
+    * @date 2022/10/19
+    * @param  appScanRecordRequestVo 参数
+    * @return 扫码记录列表
+    */
+    List<AppScanRecordResponseVo> queryForExport(AppScanRecordRequestVo appScanRecordRequestVo);
 }

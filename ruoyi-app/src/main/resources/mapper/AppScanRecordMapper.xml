@@ -194,4 +194,18 @@
             </if>
         </where>
     </select>
+    <select id="queryForExport" resultMap="ScanResultMap">
+        SELECT
+            user.`name`,
+            user.contact_number,
+            scan.user_id,
+            scan.scanned_date,
+            user.department,
+            scan.org_code,
+            scan.created_date
+        FROM
+            app_scan_record scan
+        LEFT JOIN app_user user ON scan.user_id = user.id_no
+        limit #{pageIndex},#{pageSize}
+    </select>
 </mapper>
