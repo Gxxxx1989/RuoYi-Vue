@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.ruoyiapp.mapper.AppScanRecordMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="scanned_date" jdbcType="TIMESTAMP" property="scannedDate" />
-    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
-    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
-    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="scanned_date" jdbcType="TIMESTAMP" property="scannedDate"/>
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode"/>
+    </resultMap>
+
+    <resultMap id="ScanResultMap" type="com.ruoyi.ruoyiapp.response.AppScanRecordResponseVo">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="contact_number" jdbcType="VARCHAR" property="contactNumber"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="scanned_date" jdbcType="TIMESTAMP" property="scannedDate"/>
+        <result column="department" jdbcType="VARCHAR" property="department"/>
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode"/>
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
+        <result column="org_code" jdbcType="VARCHAR" property="orgCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, user_id, scanned_date, created_date, created_by, update_date, updated_by,org_code
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from app_scan_record
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from app_scan_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from app_scan_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity"
+            useGeneratedKeys="true">
     insert into app_scan_record (user_id, scanned_date, created_date, 
       created_by, update_date, updated_by,org_code
       )
@@ -32,83 +47,84 @@
       #{createdBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR},#{orgCode,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity" useGeneratedKeys="true">
-    insert into app_scan_record
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="scannedDate != null">
-        scanned_date,
-      </if>
-      <if test="createdDate != null">
-        created_date,
-      </if>
-      <if test="createdBy != null">
-        created_by,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
-      <if test="updatedBy != null">
-        updated_by,
-      </if>
-      <if test="orgCode != null">
-        org_code,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="scannedDate != null">
-        #{scannedDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdDate != null">
-        #{createdDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdBy != null">
-        #{createdBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedBy != null">
-        #{updatedBy,jdbcType=VARCHAR},
-      </if>
-      <if test="orgCode != null">
-        #{orgCode,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity">
-    update app_scan_record
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="scannedDate != null">
-        scanned_date = #{scannedDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdDate != null">
-        created_date = #{createdDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdBy != null">
-        created_by = #{createdBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedBy != null">
-        updated_by = #{updatedBy,jdbcType=VARCHAR},
-      </if>
-      <if test="orgCode != null">
-        org_code = #{orgCode,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity" useGeneratedKeys="true">
+        insert into app_scan_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="scannedDate != null">
+                scanned_date,
+            </if>
+            <if test="createdDate != null">
+                created_date,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="orgCode != null">
+                org_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="scannedDate != null">
+                #{scannedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                #{orgCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity">
+        update app_scan_record
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="scannedDate != null">
+                scanned_date = #{scannedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdDate != null">
+                created_date = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                org_code = #{orgCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruoyi.ruoyiapp.entity.AppScanRecordEntity">
     update app_scan_record
     set user_id = #{userId,jdbcType=VARCHAR},
       scanned_date = #{scannedDate,jdbcType=TIMESTAMP},
@@ -119,4 +135,50 @@
       org_code = #{orgCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+    <select id="queryScanList" resultMap="ScanResultMap">
+       SELECT
+            user.`name`,
+            user.contact_number,
+            scan.user_id,
+            scan.scanned_date,
+            user.department,
+            scan.org_code
+        FROM
+            app_scan_record scan
+        LEFT JOIN app_user user ON scan.user_id = user.id_no
+        <where>
+            1=1
+            <if test="name != null and name !=''">
+                and  user.name =#{name}
+            </if>
+            <if test="userId != null and userId !=''">
+                and  scan.user_id =#{userId}
+            </if>
+            <if test="contactNumber != null and contactNumber !=''">
+                and  user.contact_number =#{contactNumber}
+            </if>
+        </where>
+        limit #{pageIndex},#{pageSize}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT
+        COUNT(DISTINCT(scan.id)) AS total
+        FROM
+        app_scan_record scan
+        LEFT JOIN app_user user ON scan.user_id = user.id_no
+        <where>
+            1=1
+            <if test="name != null and name !=''">
+                and  user.name =#{name}
+            </if>
+            <if test="userId != null and userId !=''">
+                and  scan.user_id =#{userId}
+            </if>
+            <if test="contactNumber != null and contactNumber !=''">
+                and  user.contact_number =#{contactNumber}
+            </if>
+        </where>
+    </select>
 </mapper>

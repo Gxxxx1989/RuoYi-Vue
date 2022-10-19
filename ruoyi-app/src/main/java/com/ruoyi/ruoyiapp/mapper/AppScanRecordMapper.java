@@ -1,7 +1,11 @@
 package com.ruoyi.ruoyiapp.mapper;
 
 import com.ruoyi.ruoyiapp.entity.AppScanRecordEntity;
+import com.ruoyi.ruoyiapp.request.AppScanRecordRequestVo;
+import com.ruoyi.ruoyiapp.response.AppScanRecordResponseVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 扫描记录
@@ -23,4 +27,14 @@ public interface AppScanRecordMapper {
     int updateByPrimaryKeySelective(AppScanRecordEntity record);
 
     int updateByPrimaryKey(AppScanRecordEntity record);
+
+    List<AppScanRecordResponseVo> queryScanList(AppScanRecordRequestVo appScanRecordRequestVo);
+
+    /**
+     * 功能描述 查询总条数
+     * @author guoxi_789@126.com
+     * @date 2022/10/17
+     * @return 总条数
+     */
+    int count(AppScanRecordRequestVo userRequestVo);
 }

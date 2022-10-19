@@ -12,31 +12,49 @@ import java.io.Serializable;
  */
 @Data
 public class UserRequestVo implements Serializable {
-    /**姓名*/
+    /**
+     * 姓名
+     */
     private String name;
 
-    /**身份证号码*/
+    /**
+     * 身份证号码
+     */
     private String idNo;
 
-    /**性别*/
+    /**
+     * 性别
+     */
     private String sex;
 
-    /**联系电话*/
+    /**
+     * 联系电话
+     */
     private String contactNumber;
 
-    /**单位*/
+    /**
+     * 单位
+     */
     private String company;
 
-    /**部门*/
+    /**
+     * 部门
+     */
     private String department;
 
-    /**页面索引*/
+    /**
+     * 页面索引
+     */
     private int pageIndex;
 
-    /**页面条数*/
+    /**
+     * 页面条数
+     */
     private int pageSize;
 
-    /**检测机构*/
+    /**
+     * 检测机构
+     */
     private String orgCode;
 
 }

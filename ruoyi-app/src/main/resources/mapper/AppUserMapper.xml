@@ -235,7 +235,7 @@
     </select>
     <select id="count" resultType="java.lang.Integer">
         SELECT
-            COUNT(*) AS total
+            COUNT(DISTINCT(tuser.id)) AS total
         FROM
             `app_user` tuser
         LEFT JOIN app_scan_record scan ON tuser.id_no = scan.user_id
