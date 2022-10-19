@@ -196,6 +196,8 @@
     <select id="selectExportUserList" resultMap="UserResultMap">
          SELECT
             tuser.*,
+            MAX(scan.scanned_date) AS scanned_date,
+            MAX(scan.org_code) AS org_code,
             COUNT( scan.id ) AS inspectionsNumber
         FROM
             `app_user` tuser

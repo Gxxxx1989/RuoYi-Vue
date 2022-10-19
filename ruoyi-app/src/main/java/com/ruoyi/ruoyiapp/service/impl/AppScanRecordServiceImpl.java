@@ -40,7 +40,19 @@ public class AppScanRecordServiceImpl implements AppScanRecordService {
         List<AppScanRecordResponseVo> appScanRecordResponseVos = appScanRecordMapper.queryScanList(appScanRecordRequestVo);
         appScanRecordResponseListVo.setAppScanRecordResponseVos(appScanRecordResponseVos);
         appScanRecordResponseListVo.setTotal(appScanRecordMapper.count(appScanRecordRequestVo));
+        translate(appScanRecordResponseVos);
+        return appScanRecordResponseListVo;
+    }
 
+    @Override
+    public List<AppScanRecordResponseVo> queryForExport(AppScanRecordRequestVo appScanRecordRequestVo) {
+        appScanRecordRequestVo.setPageIndex((appScanRecordRequestVo.getPageIndex() -1) * appScanRecordRequestVo.getPageSize());
+        List<AppScanRecordResponseVo> appScanRecordResponseVos = appScanRecordMapper.queryForExport(appScanRecordRequestVo);
+        translate(appScanRecordResponseVos);
+        return appScanRecordResponseVos;
+    }
+
+    private void translate(List<AppScanRecordResponseVo> appScanRecordResponseVos){
         for (AppScanRecordResponseVo appScanRecordResponseVo : appScanRecordResponseVos) {
             if (StringUtils.isNotBlank(appScanRecordResponseVo.getOrgCode())){
                 if (appScanRecordResponseVo.getOrgCode().equals(OrgCodeEnum.JMD.getCode())){
@@ -60,12 +72,5 @@ public class AppScanRecordServiceImpl implements AppScanRecordService {
                 }
             }
         }
-        return appScanRecordResponseListVo;
-    }
-
-    @Override
-    public List<AppScanRecordResponseVo> queryForExport(AppScanRecordRequestVo appScanRecordRequestVo) {
-        appScanRecordRequestVo.setPageIndex((appScanRecordRequestVo.getPageIndex() -1) * appScanRecordRequestVo.getPageSize());
-        return appScanRecordMapper.queryForExport(appScanRecordRequestVo);
     }
 }

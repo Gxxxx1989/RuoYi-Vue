@@ -57,7 +57,7 @@ public class UserResponseVo {
     /**
      * 创建日期
      */
-    @Excel(name = "扫码日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "最近扫码日期",width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date scannedDate;
 
@@ -80,13 +80,8 @@ public class UserResponseVo {
     @Excel(name = "检验次数")
     private int inspectionsNumber;
 
-    /**
-     * 总条数
-     */
-    private int total;
 
     /**检测机构*/
-    @Excel(name = "检测机构")
     private String orgCode;
 
     private static final long serialVersionUID = 1L;
