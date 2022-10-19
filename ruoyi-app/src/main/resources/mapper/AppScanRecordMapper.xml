@@ -159,9 +159,16 @@
             <if test="contactNumber != null and contactNumber !=''">
                 and  user.contact_number =#{contactNumber}
             </if>
+            <if test="scannedDateStart!=null">
+                and <![CDATA[scan.scanned_date >= #{scannedDateStart,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="scannedDateEnd!=null">
+                and <![CDATA[scan.scanned_date <= #{scannedDateEnd,jdbcType=TIMESTAMP}]]>
+            </if>
         </where>
         limit #{pageIndex},#{pageSize}
     </select>
+
     <select id="count" resultType="java.lang.Integer">
         SELECT
         COUNT(DISTINCT(scan.id)) AS total
@@ -178,6 +185,12 @@
             </if>
             <if test="contactNumber != null and contactNumber !=''">
                 and  user.contact_number =#{contactNumber}
+            </if>
+            <if test="scannedDateStart!=null">
+                and <![CDATA[scan.scanned_date >= #{scannedDateStart,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="scannedDateEnd!=null">
+                and <![CDATA[scan.scanned_date <= #{scannedDateEnd,jdbcType=TIMESTAMP}]]>
             </if>
         </where>
     </select>
